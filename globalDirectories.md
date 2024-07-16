@@ -15,6 +15,8 @@ We often want to specify a place to store data and outputs. Let's do this as an 
 
 Edit the file with your preffered editor e.g.
 
+### Bash shell
+
 ```bash
 nano ~/.bashrc
 ```
@@ -27,6 +29,16 @@ export OUT_DIR=/home/user/myoutputs
 
 Save the file and exit.
 You can then apply these files by either opening a new terminal or enerting ```source ~/.bashrc```. 
+
+
+### C shell
+Very similar except we use the following.
+```c
+setenv DATA_DIR /path/to/data
+setenv OUT_DIR /path/to/output
+```
+
+
 
 #### Testing and usage
 
