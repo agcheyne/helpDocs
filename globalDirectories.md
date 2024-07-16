@@ -8,9 +8,8 @@ If you are using a bash environment these can be specified in the ```.bashrc``` 
 
 This is usually stored at ```~/.bashrc```  
 
-## Example
 
-### Adding the directories
+## Adding the directories
 We often want to specify a place to store data and outputs. Let's do this as an example.
 
 Edit the file with your preffered editor e.g.
@@ -41,7 +40,7 @@ setenv OUT_DIR /path/to/output
 then source it ```source ~/.cshrc```
 
 
-#### Testing and usage
+### Testing and usage
 
 Try typing the following in your terminal:
 ```bash
@@ -57,7 +56,7 @@ You can now easily move things using these too.
 cp myfile.txt $OUT_DIR
 ```
 
-## Using this in programs
+## Using environment variables in programs
 
 ### Python
 To access and use these environment variables in python we need to use the `os` modile.
