@@ -33,11 +33,12 @@ You can then apply these files by either opening a new terminal or enerting ```s
 
 ### C shell
 Very similar except we use the `.cshrc` file and use the following 
-```c
+```csh
 setenv DATA_DIR /path/to/data
 setenv OUT_DIR /path/to/output
 ```
 
+then source it ```source ~/.cshrc```
 
 
 #### Testing and usage
