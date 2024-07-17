@@ -56,6 +56,15 @@ You can now easily move things using these too.
 cp myfile.txt $OUT_DIR
 ```
 
+### Docker
+
+If you are using a Dockerfile you can add environment variables in the Dockerfile itself.
+
+```
+ENV OUT_DIR=./outputs/
+ENV DATA_DIR=./data/
+```
+
 ## Using environment variables in programs
 
 ### Python
@@ -94,11 +103,4 @@ int main() {
 }
 ```
 
-### Docker
 
-If you are using a Dockerfile you can add environment variables in the Dockerfile itself.
-
-```
-ENV OUT_DIR=./outputs/
-ENV DATA_DIR=./data/
-```
