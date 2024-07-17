@@ -93,3 +93,12 @@ int main() {
     return 0;
 }
 ```
+
+### Docker
+
+If you are using a Dockerfile you can add environment variables in the Dockerfile itself.
+
+```
+ENV OUT_DIR=./outputs/
+ENV DATA_DIR=./data/
+```
