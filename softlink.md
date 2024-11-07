@@ -1,4 +1,4 @@
-Creating Soft Links
+## Creating Soft Links
 You can create a soft link using the ln command with the -s option. ln by default is a hard klink
 
 The syntax is:
@@ -6,11 +6,11 @@ ln -s /path/to/original/file.txt /path/to/shortcut/link_name
 
 The l at the beginning of the permissions (lrwxrwxrwx) indicates it's a symbolic link.
 
-Removing Soft Links
+## Removing Soft Links
 To remove a soft link, you can use the rm command:
 rm /path/to/shortcut/link_name
 
--- note on hard vs soft links ---
+### note on hard vs soft links
 Use Hard Links When:
 - You Need Redundancy: Hard links are ideal when you want multiple filenames pointing to the same data so that even if the original file is deleted, the data remains accessible. Each hard link is essentially a full entry to the same data on disk.
 - You Don’t Need to Cross Filesystems: Hard links only work within the same filesystem, so they’re best used when both files are on the same drive or partition.
