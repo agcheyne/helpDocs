@@ -9,7 +9,7 @@ run the EPCS ioc as nptest
 >./st.cmd
 
 open another terminal as nptest and run the motor controller which commnuicates with EPICS.
->cd v1
+>cd ~/v1
 >
 >./thor_epics -e
 
