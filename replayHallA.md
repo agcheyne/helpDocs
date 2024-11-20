@@ -6,4 +6,5 @@ Follow Sebastian's guide
 >sbsoffline/install/run_replay_here
 >
 >.L <replay_script>.C+
+>
 >replay_script(<run_number>)
