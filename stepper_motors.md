@@ -1,4 +1,4 @@
-To start the motor controller:
+## To start the motor controller:
 
 open a terminal and switch user to nptest:
 >su nptest
@@ -13,6 +13,7 @@ open another terminal as nptest and run the motor controller which commnuicates 
 >
 >./thor_epics -e
 
+### Move it move it
 you should now be able to run EPICS commands to read and move the motor.
 The EPICS channels are:
 
