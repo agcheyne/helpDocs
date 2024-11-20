@@ -26,8 +26,9 @@ Command (preface this with caput):
 - THOR_X:move_abs
 - THOR_Y:move_home
 
-e.g.
 >caput THOR_X:move_abs 69
+>caget THOR_Y:read_pos
+
 
 open terminal run CSS
 >/home/nptest/CSS/basic-epics-4.5.0/css
