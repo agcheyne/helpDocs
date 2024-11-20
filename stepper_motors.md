@@ -1,7 +1,8 @@
 To start the motor controller:
 
 open a terminal and switch user to nptest:
-su nptest
+>su nptest
+>
 run the EPCS ioc as nptest
 >cd $EPICS/app/iocBoot/iocThorLabs
 >
