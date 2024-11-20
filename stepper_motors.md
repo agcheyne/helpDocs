@@ -15,10 +15,12 @@ open another terminal as nptest and run the motor controller which commnuicates 
 
 you should now be able to run EPICS commands to read and move the motor.
 The EPICS channels are:
+
 Readback (preface this with caget): 
 - THOR_Y:read_pos
 - THOR_X:read_pos
 - THOR_Y:read_stat
+  
 Command (preface this with caput):
 - THOR_Y:move_abs
 - THOR_X:move_abs
