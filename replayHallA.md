@@ -3,7 +3,7 @@ Follow Sebastian's guide:
 https://sbs.jlab.org/DocDB/0004/000423/010/Hall_A_Analysis_Software_Installation_Guide%20v9.pdf
 
 ### Git updates
-some Gitupdates to replay/offline might break the replaying.
+some Gitupdates to replay/offline can break replaying.
 If this happens you may need to rebuild SBS-offline (and maybe analyzer too).
 
 To do this, simply remove the build and install contents in SBS-offline like so.
