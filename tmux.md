@@ -1,7 +1,6 @@
 ## Start a tmux Session To start a new tmux session:
 
 ```bash
-Copy code
 tmux new -s session_name
 ```
 
