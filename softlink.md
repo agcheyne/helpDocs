@@ -1,5 +1,6 @@
 ## Creating Soft Links
-You can create a soft link using the ln command with the -s option. ln by default is a hard klink
+You can create a soft link using the ln command with the -s option. ln by default is a hard link
+This works for files and directories.
 
 The syntax is:
 >ln -s /path/to/original/file.txt /path/to/shortcut/link_name
