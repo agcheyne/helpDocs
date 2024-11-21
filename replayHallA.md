@@ -9,6 +9,7 @@ To do this, simply remove the build and install contents in SBS-offline like so.
 >cd $SBS/../build
 >rm * -rf
 >rm ../install/* -rf
+
 You can then rebuild as per Sebastian's guide:
 >cd build
 >cmake -DCXXMAXERRORS=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=../install -S ../SBS-offline/
