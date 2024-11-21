@@ -7,10 +7,11 @@ some Gitupdates to replay/offline can break replaying.
 If this happens you may need to rebuild SBS-offline (and maybe analyzer too).
 
 To do this, simply remove the build and install contents in SBS-offline like so.
->cd $SBS/../build
->rm * -rf
->
->rm ../install/* -rf
+`` 
+cd $SBS/../build
+rm * -rf
+rm ../install/* -rf
+``
 
 You can then rebuild as per Sebastian's guide:
 >cd build
