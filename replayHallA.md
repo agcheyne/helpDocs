@@ -14,19 +14,21 @@ rm ../install/* -rf
 ```
 
 You can then rebuild as per Sebastian's guide:
->cd build
->
->cmake -DCXXMAXERRORS=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=../install -S ../SBS-offline/
->
->make install
+```bash
+cd build
+cmake -DCXXMAXERRORS=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=../install -S ../SBS-offline/
+make install
+```
 
 
 ## Replaying scripts
+```bash
 >sbsoffline/install/run_replay_here
 >
 >.L <replay_script>.C+
 >
 >replay_script(<run_number>)
+```
 
 ## Raw .evio file locations
 ### stored files
@@ -41,7 +43,10 @@ the locations for files before they are sent to tape is:
 ### tape files
 If the files are not in the above storage locations they will need to be retrieved from tape.
 
-tape storage is at
->/mss/halla/sbs/GEnRP/raw/
->
->jcache get /path/to/file.evio
+To check and retrieve the tape in storage is 
+```bash
+ls /mss/halla/sbs/GEnRP/raw/*<run_number>*
+```
+```
+jcache get /path/to/file.evio
+```
