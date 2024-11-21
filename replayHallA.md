@@ -1,5 +1,6 @@
 ## Setting up sbs-offline and sbs replay
-Follow Sebastian's guide
+Follow Sebastian's guide: 
+https://sbs.jlab.org/DocDB/0004/000423/010/Hall_A_Analysis_Software_Installation_Guide%20v9.pdf
 
 ### Git updates
 some Gitupdates to replay/offline might break the replaying.
