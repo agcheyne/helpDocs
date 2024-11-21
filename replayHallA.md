@@ -1,6 +1,19 @@
 ## Setting up sbs-offline and sbs replay
 Follow Sebastian's guide
 
+### Git updates
+some Gitupdates to replay/offline might break the replaying.
+If this happens you may need to rebuild SBS-offline (and maybe analyzer too).
+
+To do this, simply remove the build and install contents in SBS-offline like so.
+>cd $SBS/../build
+>rm * -rf
+>rm ../install/* -rf
+You can then rebuild as per Sebastian's guide:
+>cd build
+>cmake -DCXXMAXERRORS=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=../install -S ../SBS-offline/
+>make install
+
 
 ## Replaying scripts
 >sbsoffline/install/run_replay_here
