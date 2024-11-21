@@ -2,13 +2,13 @@
 You can create a soft link using the ln command with the -s option. ln by default is a hard klink
 
 The syntax is:
-ln -s /path/to/original/file.txt /path/to/shortcut/link_name
+>ln -s /path/to/original/file.txt /path/to/shortcut/link_name
 
 The l at the beginning of the permissions (lrwxrwxrwx) indicates it's a symbolic link.
 
 ## Removing Soft Links
 To remove a soft link, you can use the rm command:
-rm /path/to/shortcut/link_name
+>rm /path/to/shortcut/link_name
 
 ### note on hard vs soft links
 Use Hard Links When:
