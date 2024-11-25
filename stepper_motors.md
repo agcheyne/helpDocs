@@ -46,4 +46,5 @@ see examples of a this in
 If you want a GUI you can use the following:
 open terminal run CSS
 >/home/nptest/CSS/basic-epics-4.5.0/css
+>
 Say OK to default workspace.
