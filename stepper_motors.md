@@ -30,6 +30,7 @@ Command (preface this with caput):
 - THOR_X:move_abs
 - THOR_Y:move_home
 
+examples of commands:
 ```bash
 caput THOR_X:move_abs 69
 caget THOR_Y:read_pos
