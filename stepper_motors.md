@@ -37,7 +37,8 @@ caget THOR_Y:read_pos
 ```
 
 These commands can be put into shell scripts:
-see examples in 
+
+see examples of a this in 
 >/home/nptest/v1/
 
 ## GUI
