@@ -31,7 +31,12 @@ Command (preface this with caput):
 >
 >caget THOR_Y:read_pos
 
+These commands can be put into shell scripts:
+see examples in >/home/nptest/v1/
 
+## GUI
+
+If you want a GUI you can use the following:
 open terminal run CSS
 >/home/nptest/CSS/basic-epics-4.5.0/css
 Say OK to default workspace.
