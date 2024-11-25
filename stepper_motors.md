@@ -1,17 +1,20 @@
 ## To start the motor controller:
 
 open a terminal and switch user to nptest:
->su nptest
->
+```bash
+su nptest
+```
 run the EPCS ioc as nptest
->cd $EPICS/app/iocBoot/iocThorLabs
->
->./st.cmd
+```bash
+$EPICS/app/iocBoot/iocThorLabs
+./st.cmd
+```
 
 open another terminal as nptest and run the motor controller which commnuicates with EPICS.
->cd ~/v1
->
->./thor_epics -e
+```bash
+cd ~/v1
+./thor_epics -e
+```
 
 ### Move it move it
 you should now be able to run EPICS commands to read and move the motor.
@@ -27,12 +30,14 @@ Command (preface this with caput):
 - THOR_X:move_abs
 - THOR_Y:move_home
 
+```bash
 >caput THOR_X:move_abs 69
->
 >caget THOR_Y:read_pos
+```
 
 These commands can be put into shell scripts:
-see examples in >/home/nptest/v1/
+see examples in 
+>/home/nptest/v1/
 
 ## GUI
 
