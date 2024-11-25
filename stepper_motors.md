@@ -31,8 +31,8 @@ Command (preface this with caput):
 - THOR_Y:move_home
 
 ```bash
->caput THOR_X:move_abs 69
->caget THOR_Y:read_pos
+caput THOR_X:move_abs 69
+caget THOR_Y:read_pos
 ```
 
 These commands can be put into shell scripts:
