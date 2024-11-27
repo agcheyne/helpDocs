@@ -1,4 +1,5 @@
-# Glossary – DAQ & Trigger Units
+# Glossary – DAQ & Trigger Units 
+(From CAEN website https://www.caen.it/support-services/daq-trigger-units/)
 
 ---
 
@@ -181,8 +182,19 @@
 - **Leading Edge Discriminator**  
   Delivers a logic pulse for each input signal larger than a programmable threshold.
 
----
----
+- **Live Insertion**  
+  The possibility of inserting (or removing) a board into the crate without switching it off.
+  
+- **Low Threshold Discriminator**  
+  A Leading Edge Discriminator with high sensitivity on small signals.
+
+- **LSB**  
+  Least Significant Bit.
+
+- **LVDS**  
+  Low Voltage Differential Signaling (specified in the IEEE 1596.3 standard), it’s a way to communicate data using a very low voltage swing (about 350 mV) over balanced connections.
+
+--- 
 
 ## M
 
