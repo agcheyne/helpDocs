@@ -6,6 +6,7 @@ The important things that may need changed are:
 - enable the group/channel you want
   - if you are using > 8 channels it will only display the first 8 in plotting (it will still write the rest)
   - to visualise groups 1+, disable group 0, etc..
+for MCP scans I have been editing the config file in /scratch2/andrewc/WaveDumpConfig_X1742.txt
 
 ## Recording Data
 1. Navigate to the folder you want to record the data to (Should be a work disk or scratch disk as we will write big data files)
