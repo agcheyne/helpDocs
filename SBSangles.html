@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elastic e-n Scattering Kinematics</title>
+  <style>
+    body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    #controls { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+    #diagram { border: 1px solid #ccc; margin-bottom: 20px; }
+    table { border-collapse: collapse; margin-top: 10px; }
+    table, th, td { border: 1px solid #ccc; }
+    th, td { padding: 8px 12px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    th .units { display: block; font-size: 0.8em; color: #666; }
+    .warning { fill: red; font-size: 14px; }
+    .equation { margin-top: 20px; font-size: 16px; text-align: left; max-width: 500px; }
+    .equation p { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <h2>Elastic e⁻-N Scattering Kinematics</h2>
+  <div id="controls">
+    <div>
+      <label for="beamSelect">Beam Energy (GeV):</label><br>
+      <select id="beamSelect">
+        <option value="4.359">4.36</option>
+        <option value="4.4">4.4</option>
+        <option value="6.476">6.48</option>
+        <option value="8.588">8.59</option>
+        <option value="8.8">8.8</option>
+        <option value="10.688">10.69</option>
+      </select>
+    </div>
+    <div>
+      <label for="particleSelect">Target:</label><br>
+      <select id="particleSelect">
+        <option value="0.93957">Neutron (0.93957 GeV/c²)</option>
+        <option value="0.93827">Proton (0.93827 GeV/c²)</option>
+      </select>
+    </div>
+    <div>
+      <label>Mode:</label><br>
+      <label><input type="radio" name="mode" value="q2" checked> Q² Input</label><br>
+      <label><input type="radio" name="mode" value="angle"> θₑ Input</label>
+    </div>
+    <div id="q2Section">
+      <label for="q2Slider">Q²:</label><br>
+      <input type="range" id="q2Slider" min="0.05" max="100" step="0.01" value="4.4" />
+      <div>Q² = <span id="q2Val">4.40</span> GeV²</div>
+      <div><strong>Q²<sub>max</sub>:</strong> <span id="q2maxVal">--</span> GeV²</div>
+    </div>
+    <div id="angleSection" style="display: none;">
+      <label for="angleInput">θₑ (degrees):</label><br>
+      <input type="range" id="angleInput" min="1.0" max="179." step="1.0" value="30" />
+      <div>θₑ = <span id="angleVal">30.0</span>°</div>
+    </div>
+  </div>
+
+  <svg id="diagram" width="500" height="300">
+    <defs>
+      <marker id="arrowBlue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10Z" fill="#1f77b4"/>
+      </marker>
+      <marker id="arrowOrange" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10Z" fill="#ff7f0e"/>
+      </marker>
+    </defs>
+    <line x1="50" y1="150" x2="450" y2="150" stroke="#888" stroke-width="1" stroke-dasharray="5,5" />
+    <text x="180" y="170" fill="#000">Beam 0°</text>
+    <circle cx="250" cy="150" r="4" fill="#000" />
+    <line id="eArrow" x1="250" y1="150" stroke="#1f77b4" stroke-width="3" marker-end="url(#arrowBlue)" />
+    <line id="nArrow" x1="250" y1="150" stroke="#ff7f0e" stroke-width="3" marker-end="url(#arrowOrange)" />
+    <path id="arcE" fill="none" stroke="#1f77b4" stroke-width="2" />
+    <path id="arcN" fill="none" stroke="#ff7f0e" stroke-width="2" />
+    <text id="angleElabel" fill="#1f77b4" font-size="12"></text>
+    <text id="angleNlabel" fill="#ff7f0e" font-size="12"></text>
+    <text id="warning" class="warning" x="250" y="140" text-anchor="middle" visibility="hidden">
+      Invalid configuration
+    </text>
+  </svg>
+
+  <table>
+    <thead>
+      <tr>
+        <th>E′<span class="units">GeV</span></th>
+        <th>θ<sub>e</sub><span class="units">°</span></th>
+        <th>θ<sub>n</sub><span class="units">°</span></th>
+        <th>E<sub>n</sub><span class="units">GeV</span></th>
+        <th>Q²<span class="units">GeV²</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="Eprime">--</td>
+        <td id="thetaE">--</td>
+        <td id="thetaN">--</td>
+        <td id="En">--</td>
+        <td id="Q2display">--</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="equation">
+    <strong>Equations:</strong>
+    <p>Q² = 4 E E′ sin²(θₑ / 2)</p>
+    <p>E′ = E / (1 + (E/M)(1 - cos θₑ))</p>
+    <p>θₙ = arctan(sin θₑ / (E / E′ - cos θₑ))</p>
+  </div>
+
+  <script>
+    const origin = { x: 250, y: 150 };
+    const arrowLength = 100;
+    const arcRadius = 40;
+
+    const elems = {
+      beam: document.getElementById('beamSelect'),
+      particle: document.getElementById('particleSelect'),
+      q2Slider: document.getElementById('q2Slider'),
+      q2Val: document.getElementById('q2Val'),
+      q2maxVal: document.getElementById('q2maxVal'),
+      angleInput: document.getElementById('angleInput'),
+      angleVal: document.getElementById('angleVal'),
+      q2Section: document.getElementById('q2Section'),
+      angleSection: document.getElementById('angleSection'),
+      eArrow: document.getElementById('eArrow'),
+      nArrow: document.getElementById('nArrow'),
+      arcE: document.getElementById('arcE'),
+      arcN: document.getElementById('arcN'),
+      angleElabel: document.getElementById('angleElabel'),
+      angleNlabel: document.getElementById('angleNlabel'),
+      Eprime: document.getElementById('Eprime'),
+      thetaE: document.getElementById('thetaE'),
+      thetaN: document.getElementById('thetaN'),
+      En: document.getElementById('En'),
+      Q2display: document.getElementById('Q2display'),
+      warning: document.getElementById('warning'),
+    };
+
+    function polarCoords(angle, length, invertY = false) {
+      return {
+        x: origin.x + length * Math.cos(angle),
+        y: origin.y + (invertY ? -1 : 1) * length * Math.sin(angle),
+      };
+    }
+
+    function computeQ2Max(E, M) {
+      return (4 * E * E) / (1 + (2 * E / M));
+    }
+
+    function update() {
+      const E = parseFloat(elems.beam.value);
+      const M = parseFloat(elems.particle.value);
+      const Q2max = computeQ2Max(E, M);
+      elems.q2Slider.max = Q2max.toFixed(2);
+      elems.q2maxVal.textContent = Q2max.toFixed(2);
+
+      const mode = document.querySelector('input[name="mode"]:checked').value;
+
+      let thetaE, Ep, Q2;
+      if (mode === 'q2') {
+        Q2 = parseFloat(elems.q2Slider.value);
+        elems.q2Val.textContent = Q2.toFixed(2);
+        Ep = E - Q2 / (2 * M);
+        const cosE = 1 - Q2 / (2 * E * Ep);
+        thetaE = Math.acos(Math.max(-1, Math.min(1, cosE)));
+      } else {
+        thetaE = parseFloat(elems.angleInput.value) * Math.PI / 180;
+        elems.angleVal.textContent = (thetaE * 180 / Math.PI).toFixed(1);
+        const cosE = Math.cos(thetaE);
+        Ep = E / (1 + (E / M) * (1 - cosE));
+        Q2 = 4 * E * Ep * Math.pow(Math.sin(thetaE / 2), 2);
+      }
+
+      const thetaN = Math.atan2(Math.sin(thetaE), (E / Ep) - Math.cos(thetaE));
+      const En = M + Q2 / (2 * M);
+
+      if (isNaN(thetaE) || isNaN(thetaN) || Ep <= 0 || Ep > E) {
+        [elems.Eprime, elems.thetaE, elems.thetaN, elems.En, elems.Q2display].forEach(el => el.textContent = '--');
+        [elems.eArrow, elems.nArrow].forEach(ar => {
+          ar.setAttribute('x2', origin.x);
+          ar.setAttribute('y2', origin.y);
+        });
+        [elems.arcE, elems.arcN].forEach(p => p.setAttribute('d', ''));
+        [elems.angleElabel, elems.angleNlabel].forEach(l => l.textContent = '');
+        elems.warning.setAttribute('visibility', 'visible');
+        return;
+      }
+
+      elems.warning.setAttribute('visibility', 'hidden');
+
+      const dE = thetaE * 180 / Math.PI;
+      const dN = thetaN * 180 / Math.PI;
+
+      elems.Eprime.textContent = Ep.toFixed(2);
+      elems.thetaE.textContent = dE.toFixed(1);
+      elems.thetaN.textContent = dN.toFixed(1);
+      elems.En.textContent = En.toFixed(2);
+      elems.Q2display.textContent = Q2.toFixed(2);
+
+      const ePos = polarCoords(thetaE, arrowLength, true);
+      elems.eArrow.setAttribute('x2', ePos.x);
+      elems.eArrow.setAttribute('y2', ePos.y);
+
+      const nPos = polarCoords(thetaN, arrowLength, false);
+      elems.nArrow.setAttribute('x2', nPos.x);
+      elems.nArrow.setAttribute('y2', nPos.y);
+
+      const exA = origin.x + arcRadius;
+      const eyA = origin.y;
+      const ee = polarCoords(thetaE, arcRadius, true);
+      elems.arcE.setAttribute('d', `M ${exA} ${eyA} A ${arcRadius} ${arcRadius} 0 0 0 ${ee.x} ${ee.y}`);
+      elems.angleElabel.setAttribute('x', origin.x + (arcRadius + 10) * Math.cos(thetaE / 2));
+      elems.angleElabel.setAttribute('y', origin.y - (arcRadius + 10) * Math.sin(thetaE / 2));
+      elems.angleElabel.textContent = dE.toFixed(1) + '°';
+
+      const neA = polarCoords(thetaN, arcRadius, false);
+      elems.arcN.setAttribute('d', `M ${exA} ${eyA} A ${arcRadius} ${arcRadius} 0 0 1 ${neA.x} ${neA.y}`);
+      elems.angleNlabel.setAttribute('x', origin.x + (arcRadius + 10) * Math.cos(thetaN / 2));
+      elems.angleNlabel.setAttribute('y', origin.y + (arcRadius + 10) * Math.sin(thetaN / 2));
+      elems.angleNlabel.textContent = dN.toFixed(1) + '°';
+    }
+
+    ['beamSelect', 'particleSelect', 'q2Slider', 'angleInput'].forEach(id =>
+      document.getElementById(id).addEventListener('input', update)
+    );
+
+    document.querySelectorAll('input[name="mode"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        elems.q2Section.style.display = (mode === 'q2') ? 'block' : 'none';
+        elems.angleSection.style.display = (mode === 'angle') ? 'block' : 'none';
+        update();
+      });
+    });
+
+    update();
+  </script>
+</body>
+</html>
