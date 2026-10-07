@@ -1,0 +1,7 @@
+## GUI
+https://scicomp.jlab.org/scicomp/swif/summary
+
+## Useful commands
+swif2 status <workflow_name> 
+swif2 status <workflow_name> -problems -display long
+swif2 retry-jobs <workflow_name> -problems <problem>
